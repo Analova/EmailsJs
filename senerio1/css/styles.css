@@ -62,6 +62,7 @@
 .gg-close {
     /* This value will multiple the actual size  */
     --ggs: 2;
+    background: red;
 }
 
 .email-modal__container {
