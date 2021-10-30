@@ -2,34 +2,15 @@ window.onload = function(){
     let emailState= false;
 
     let emailModal = document.getElementsByClassName("email-modal")[0]
-    let closeModal = document.getElementsByClassName("email-modal__close-btn")[0]
+    let closeButton = document.getElementsByClassName("email-modal__close-btn")[0]
     let emailInput = document.getElementsByClassName("email-modal__input")[0]
     let emailButton = document.getElementsByClassName("email-modal__button")[0]
+    let thankContainer = document.getElementsByClassName("email-thank")[0]
    
 
     function emailIsValid(email){
         return /\S+@\S+\.\S+/.test(email)
     }
-
-   
-    emailButton.addEventListener("click", ()=>{
-        if(emailIsValid(emailInput.value)){
-                  console.log(emailInput.value)
-
-        }else{
-            document.getElementsByClassName
-            ("email-modal__form-group")[0].classList.add
-            ("email-modal__form-group--error")
-             document.getElementsByClassName
-            ("email-modal__error-message")[0].classList.add
-            ("email-modal__error-message--active")
-        }
-
-    })
-
-    closeModal.addEventListener("click", ()=>{
-    emailModal.classList.remove("email-modal--visible")
-    })
 
      let showModal =()=>{
     if(emailState == false){
@@ -37,6 +18,52 @@ window.onload = function(){
     emailState= true;
     }    
     }
+
+    let closeModal=()=>{
+emailModal.classList.remove("email-modal--visible")
+    }
+
+    let removeErrors=()=>{
+        document.getElementsByClassName
+            ("email-modal__form-group")[0].classList.remove
+            ("email-modal__form-group--error")
+             document.getElementsByClassName
+            ("email-modal__error-message")[0].classList.remove
+            ("email-modal__error-message--active")
+    }
+
+    let showThankMessage=()=>{
+        thankContainer.classList.add("email-thank--success")
+    }
+
+    emailInput.addEventListener("click",()=>{
+        removeErrors()
+    })
+
+     let addErrors=()=>{
+        document.getElementsByClassName
+            ("email-modal__form-group")[0].classList.add
+            ("email-modal__form-group--error")
+             document.getElementsByClassName
+            ("email-modal__error-message")[0].classList.add
+            ("email-modal__error-message--active")
+    }
+   
+    emailButton.addEventListener("click", ()=>{
+        if(emailIsValid(emailInput.value)){
+        showThankMessage()
+
+        }else{
+            addErrors();
+        }
+
+    })
+
+    closeButton.addEventListener("click", ()=>{
+        closeModal();
+    
+    })
+
 
 
     document.body.addEventListener("mouseleave",()=>{
