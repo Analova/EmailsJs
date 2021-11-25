@@ -6,7 +6,7 @@ window.onload = function(){
     let emailInput = document.getElementsByClassName("email-modal__input")[0]
     let emailButton = document.getElementsByClassName("email-modal__button")[0]
     let thankContainer = document.getElementsByClassName("email-thank")[0]
-   
+    let declineOffer=document.getElementsByClassName("email-modal__decline-offer")[0]
 
     function emailIsValid(email){
         return /\S+@\S+\.\S+/.test(email)
@@ -23,6 +23,16 @@ window.onload = function(){
 emailModal.classList.remove("email-modal--visible")
     }
 
+     let addErrors=()=>{
+        document.getElementsByClassName
+            ("email-modal__form-group")[0].classList.add
+            ("email-modal__form-group--error")
+             document.getElementsByClassName
+            ("email-modal__error-message")[0].classList.add
+            ("email-modal__error-message--active")
+    }
+   
+
     let removeErrors=()=>{
         document.getElementsByClassName
             ("email-modal__form-group")[0].classList.remove
@@ -34,34 +44,32 @@ emailModal.classList.remove("email-modal--visible")
 
     let showThankMessage=()=>{
         thankContainer.classList.add("email-thank--success")
+        setTimeout(()=>{
+            closeModal();
+        },3000)
     }
 
     emailInput.addEventListener("click",()=>{
         removeErrors()
-    })
-
-     let addErrors=()=>{
-        document.getElementsByClassName
-            ("email-modal__form-group")[0].classList.add
-            ("email-modal__form-group--error")
-             document.getElementsByClassName
-            ("email-modal__error-message")[0].classList.add
-            ("email-modal__error-message--active")
-    }
-   
-    emailButton.addEventListener("click", ()=>{
-        if(emailIsValid(emailInput.value)){
-        showThankMessage()
-
-        }else{
-            addErrors();
-        }
-
-    })
+    });
 
     closeButton.addEventListener("click", ()=>{
         closeModal();
     
+    });
+
+    emailButton.addEventListener("click", ()=>{
+        if(emailIsValid(emailInput.value)){
+        showThankMessage()
+        }else{
+            addErrors();
+        }
+
+    });
+
+
+    declineOffer.addEvemtListener("click", ()=>{
+        closeModal();
     })
 
 
